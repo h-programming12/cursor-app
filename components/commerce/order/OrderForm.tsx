@@ -122,7 +122,10 @@ export default function OrderForm({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+      data-testid="order-form-modal"
+    >
       <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">주문하기</h2>
@@ -130,6 +133,7 @@ export default function OrderForm({
             type="button"
             onClick={onClose}
             className="rounded-full px-3 py-1 text-sm text-gray-500 hover:bg-gray-100"
+            data-testid="order-form-close-button"
           >
             닫기
           </button>
@@ -148,6 +152,7 @@ export default function OrderForm({
                   onChange={(e) =>
                     setContact((prev) => ({ ...prev, name: e.target.value }))
                   }
+                  data-testid="order-form-contact-name"
                 />
               </div>
               <div className="space-y-1">
@@ -159,6 +164,7 @@ export default function OrderForm({
                   onChange={(e) =>
                     setContact((prev) => ({ ...prev, phone: e.target.value }))
                   }
+                  data-testid="order-form-contact-phone"
                 />
               </div>
               <div className="space-y-1 md:col-span-2">
@@ -170,6 +176,7 @@ export default function OrderForm({
                   onChange={(e) =>
                     setContact((prev) => ({ ...prev, email: e.target.value }))
                   }
+                  data-testid="order-form-contact-email"
                 />
               </div>
             </div>
@@ -190,6 +197,7 @@ export default function OrderForm({
                       receiverName: e.target.value,
                     }))
                   }
+                  data-testid="order-form-shipping-receiver-name"
                 />
               </div>
               <div className="space-y-1">
@@ -204,6 +212,7 @@ export default function OrderForm({
                       receiverPhone: e.target.value,
                     }))
                   }
+                  data-testid="order-form-shipping-receiver-phone"
                 />
               </div>
               <div className="space-y-1 md:col-span-2">
@@ -219,6 +228,7 @@ export default function OrderForm({
                       address1: e.target.value,
                     }))
                   }
+                  data-testid="order-form-shipping-address1"
                 />
               </div>
               <div className="space-y-1 md:col-span-2">
@@ -234,40 +244,68 @@ export default function OrderForm({
                       address2: e.target.value,
                     }))
                   }
+                  data-testid="order-form-shipping-address2"
                 />
               </div>
             </div>
           </section>
 
-          <section className="space-y-2 rounded-lg bg-gray-50 p-4">
+          <section
+            className="space-y-2 rounded-lg bg-gray-50 p-4"
+            data-testid="order-form-summary"
+          >
             <h3 className="text-sm font-semibold text-gray-800">주문 요약</h3>
             <div className="space-y-2 text-sm text-gray-700">
               <div className="flex items-center justify-between">
                 <span>상품명</span>
-                <span className="font-medium">{product.name}</span>
+                <span
+                  className="font-medium"
+                  data-testid="order-form-summary-product-name"
+                >
+                  {product.name}
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span>수량</span>
-                <span className="font-medium">{quantity}개</span>
+                <span
+                  className="font-medium"
+                  data-testid="order-form-summary-quantity"
+                >
+                  {quantity}개
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span>단가</span>
-                <span className="font-medium">
+                <span
+                  className="font-medium"
+                  data-testid="order-form-summary-unit-price"
+                >
                   ₩{(product.sale_price ?? product.price).toLocaleString()}
                 </span>
               </div>
               <div className="mt-2 border-t border-gray-200 pt-2">
                 <div className="flex items-center justify-between text-base font-semibold text-gray-900">
                   <span>총 금액</span>
-                  <span>₩{totalPrice.toLocaleString()}</span>
+                  <span data-testid="order-form-summary-total-price">
+                    ₩{totalPrice.toLocaleString()}
+                  </span>
                 </div>
               </div>
             </div>
           </section>
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && (
+            <p className="text-sm text-red-500" data-testid="order-form-error">
+              {error}
+            </p>
+          )}
           {successMessage && (
-            <p className="text-sm text-emerald-600">{successMessage}</p>
+            <p
+              className="text-sm text-emerald-600"
+              data-testid="order-form-success"
+            >
+              {successMessage}
+            </p>
           )}
 
           <div className="flex justify-end gap-3">
@@ -276,6 +314,7 @@ export default function OrderForm({
               onClick={onClose}
               className="rounded-md border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
               disabled={isSubmitting}
+              data-testid="order-form-cancel-button"
             >
               취소
             </button>
@@ -283,6 +322,7 @@ export default function OrderForm({
               type="submit"
               className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-zinc-400"
               disabled={isSubmitting}
+              data-testid="order-form-submit-button"
             >
               {isSubmitting ? "주문 접수 중..." : "주문 제출하기"}
             </button>

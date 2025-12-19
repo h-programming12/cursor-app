@@ -38,10 +38,14 @@ function AddToCartSection({
             onClick={handleDecrease}
             className="h-8 w-8 rounded-full border border-gray-300 text-lg leading-none text-gray-700 hover:bg-gray-100"
             aria-label="수량 감소"
+            data-testid="product-detail-quantity-decrease"
           >
             -
           </button>
-          <span className="w-8 text-center text-sm font-medium">
+          <span
+            className="w-8 text-center text-sm font-medium"
+            data-testid="product-detail-quantity"
+          >
             {quantity}
           </span>
           <button
@@ -49,6 +53,7 @@ function AddToCartSection({
             onClick={handleIncrease}
             className="h-8 w-8 rounded-full border border-gray-300 text-lg leading-none text-gray-700 hover:bg-gray-100"
             aria-label="수량 증가"
+            data-testid="product-detail-quantity-increase"
           >
             +
           </button>
@@ -57,7 +62,10 @@ function AddToCartSection({
 
       <div className="flex items-center justify-between border-t border-gray-100 pt-3">
         <span className="text-sm text-gray-600">총 금액</span>
-        <span className="text-lg font-semibold text-gray-900">
+        <span
+          className="text-lg font-semibold text-gray-900"
+          data-testid="product-detail-total-price"
+        >
           ₩{totalPrice.toLocaleString()}
         </span>
       </div>
@@ -66,6 +74,7 @@ function AddToCartSection({
         <button
           type="button"
           className="flex-1 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-50"
+          data-testid="product-detail-add-to-cart"
         >
           장바구니 담기
         </button>
@@ -73,6 +82,7 @@ function AddToCartSection({
           type="button"
           onClick={onOrderClick}
           className="flex-1 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800"
+          data-testid="product-detail-order-button"
         >
           바로 주문하기
         </button>
@@ -104,19 +114,29 @@ export default function ProductDetailClient({
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
+              data-testid="product-detail-image"
             />
           </div>
 
           <div className="flex flex-col">
-            <h1 className="text-2xl font-semibold text-gray-900">
+            <h1
+              className="text-2xl font-semibold text-gray-900"
+              data-testid="product-detail-name"
+            >
               {product.name}
             </h1>
             <div className="mt-3 flex items-center gap-3">
-              <span className="text-2xl font-bold text-gray-900">
+              <span
+                className="text-2xl font-bold text-gray-900"
+                data-testid="product-detail-price"
+              >
                 ₩{displayPrice.toLocaleString()}
               </span>
               {product.sale_price && (
-                <span className="text-sm text-gray-400 line-through">
+                <span
+                  className="text-sm text-gray-400 line-through"
+                  data-testid="product-detail-original-price"
+                >
                   ₩{product.price.toLocaleString()}
                 </span>
               )}
